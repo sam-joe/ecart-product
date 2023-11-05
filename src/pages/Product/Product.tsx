@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import ProductList from "./ProductList";
 import { Pagination } from "antd";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { GET } from "../../service/api";
+import { updateProductQueryParams } from "../../store/Slices/Product.Slice";
 
 const Wrapper = styled.div`
   .pagination {
@@ -12,17 +16,33 @@ const Wrapper = styled.div`
 `;
 
 const Product = () => {
+  const { products, query_params } = useAppSelector(
+    (state) => state.ProductSlice
+  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    let params = `?limit=${query_params.size}&skip=${
+      (query_params.page - 1) * query_params.size
+    }`;
+    dispatch(GET("products/list", params)());
+  }, [query_params.page, query_params.size]);
+
+  const onChangePage = (page: number) => {
+    dispatch(updateProductQueryParams({ ...query_params, page: page }));
+  };
   return (
     <Wrapper>
-      <ProductList />
+      <ProductList products={products} />
       <div className="pagination">
         <Pagination
           size="default"
           showLessItems={true}
           showSizeChanger={false}
-          pageSize={10}
-          total={500}
-          defaultCurrent={1}
+          pageSize={query_params.size}
+          total={query_params.total}
+          onChange={onChangePage}
+          current={query_params.page}
         />
       </div>
     </Wrapper>

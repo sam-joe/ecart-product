@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { product } from "../../utils/constant";
 import ProductBox from "../../components/ProductBox/ProductBox";
+import { IProduct } from "../../interfaces/ProductInterface";
 
 const Wrapper = styled.div`
   padding: 5rem 2rem;
@@ -14,18 +14,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const ProductList = () => {
-  let iterator = 10;
-  const iArray: number[] = [];
-
-  for (let i = 0; i < iterator; i++) {
-    iArray.push(i);
-  }
+const ProductList = ({ products }: { products: IProduct[] }) => {
   return (
     <Wrapper>
       <div className="listing">
-        {iArray.map((el) => {
-          return <ProductBox key={el} {...product} />;
+        {products.map((el) => {
+          return <ProductBox key={el.id} {...el} />;
         })}
       </div>
     </Wrapper>

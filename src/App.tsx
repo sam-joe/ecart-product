@@ -1,12 +1,9 @@
 import "./App.css";
-import EntryLayout from "./layouts/EntryLayout/EntryLayout";
-import LandingLayout from "./layouts/LandingLayout/LandingLayout";
-
+import Router from "./router";
 function App() {
   return (
     <>
-      {/* <EntryLayout /> */}
-      <LandingLayout />
+      <Router />
     </>
   );
 }

@@ -7,6 +7,7 @@ import {
   fontMediumLight,
   fontNormalDark,
 } from "../../assets/styles/CommonStyled";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled(CardWrapper)`
   .product-info {
@@ -39,6 +40,7 @@ const Wrapper = styled(CardWrapper)`
       margin-bottom: 2rem;
       img {
         max-height: 30rem;
+        max-width: 30rem;
       }
     }
     .product-contents {
@@ -66,8 +68,13 @@ const Wrapper = styled(CardWrapper)`
 `;
 
 const ProductBox = (product: IProduct) => {
+  const navigate = useNavigate();
+
+  const viewProductDetails = () => {
+    navigate("/home/product/" + product.id);
+  };
   return (
-    <Wrapper>
+    <Wrapper onClick={viewProductDetails}>
       <div className="product-info">
         <div className="discount">
           <p>{product.discountPercentage}%</p>
@@ -78,9 +85,9 @@ const ProductBox = (product: IProduct) => {
         <div className="product-contents">
           <h2>{product.brand}</h2>
           <h3>{product.title}</h3>
-          <p>
+          <div>
             Rating <Rate allowHalf defaultValue={product.rating} />
-          </p>
+          </div>
           <p>
             Price : <span className="price">{product.price} $</span>
           </p>

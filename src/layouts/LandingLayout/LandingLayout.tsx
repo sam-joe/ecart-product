@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import LandingHeader from "./LandingHeader";
-import Product from "../../pages/Product/Product";
-import ProductDetails from "../../pages/ProductDetails/ProductDetails";
-import About from "../../pages/About/About";
+import { Outlet } from "react-router-dom";
 
 const OutletWrapper = styled.main`
   min-height: calc(100% - 6.5rem);
@@ -15,9 +13,7 @@ const LandingLayout = () => {
     <>
       <LandingHeader />
       <OutletWrapper>
-        <Product />
-        {/* <ProductDetails /> */}
-        {/* <About /> */}
+        <Outlet />
       </OutletWrapper>
     </>
   );

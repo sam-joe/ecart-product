@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import { product } from "../../utils/constant";
 import CategoryTag from "../../components/CategoryTag/CategoryTag";
 import { Button, Rate } from "antd";
 import { fontMediumLight } from "../../assets/styles/CommonStyled";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { GET } from "../../service/api";
 
 const Wrapper = styled.section`
   max-width: 102.4rem;
@@ -49,24 +52,30 @@ const Wrapper = styled.section`
 `;
 
 const ProductDetails = () => {
+  const { id = 0 } = useParams();
+  const dispatch = useAppDispatch();
+  const { selectedProduct } = useAppSelector((state) => state.ProductSlice);
+  useEffect(() => {
+    dispatch(GET("products/details", `/${id}`)());
+  }, [id]);
   return (
     <Wrapper>
       <div className="image-holder">
-        <img src={product.thumbnail} />
+        {selectedProduct.thumbnail && <img src={selectedProduct.thumbnail} />}
       </div>
       <div className="product-details">
         <div className="categories">
-          <CategoryTag>{product.category}</CategoryTag>
+          <CategoryTag>{selectedProduct.category}</CategoryTag>
         </div>
-        <h2>{product.brand}</h2>
-        <h3>{product.title}</h3>
+        <h2>{selectedProduct.brand}</h2>
+        <h3>{selectedProduct.title}</h3>
 
-        <p>{product.description}</p>
+        <p>{selectedProduct.description}</p>
+        <div>
+          Rating: <Rate allowHalf value={selectedProduct.rating} />
+        </div>
         <p>
-          Rating: <Rate allowHalf value={product.rating} />
-        </p>
-        <p>
-          Price: <span className="price">{product.price}$</span>{" "}
+          Price: <span className="price">{selectedProduct.price}$</span>
         </p>
 
         <div className="action-btns">
