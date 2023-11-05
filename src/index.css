@@ -1,0 +1,76 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+:root {
+  --PRIMARY: #285e5f;
+  --SECONDARY: #64c492;
+  --NEUTRAL-1: #f2f5f9;
+  --NEUTRAL-2: #e0e6f0;
+  --NEUTRAL-3: #627078;
+  --NEUTRAL-4: #283238;
+  --AUXILIARY-1: #e2807d;
+  --AUXILIARY-2: #d6605c;
+  --WHITE: #fff;
+  --BLACK: #000000;
+  --TRANSPARENT: rgba(99, 113, 121, 0.6);
+  --DARK-TRANSPARENT: rgba(40, 50, 56, 0.8);
+  --ERROR: #b14949;
+  --ERROR-BG: #e8c8c8;
+}
+
+body {
+  font-family: "Gotham";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  color: var(--NEUTRAL-4);
+  font-size: 1.6rem;
+}
+#root {
+  background-color: var(--NEUTRAL-1);
+}
+@font-face {
+  font-family: "Gotham";
+  src: local("Gotham-Book"),
+    url("./assets/fonts/gotham/GOTHAM-BOOK.OTF") format("truetype");
+  font-weight: 350;
+}
+
+@font-face {
+  font-family: "GothamBold";
+  src: local("GothamBold"),
+    url("./assets/fonts/gotham/GOTHAMBOLD.OTF") format("truetype");
+}
+
+@font-face {
+  font-family: "GothamMedium";
+  src: local("GothamMedium"),
+    url("./assets/fonts/gotham/GOTHAM-MEDIUM.OTF") format("truetype");
+}
+
+@keyframes bg-animation {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(360deg);
+  }
+
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
